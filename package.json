@@ -1,0 +1,48 @@
+{
+    "name": "@xelyos/mail-rp",
+    "version": "1.0.0-dev",
+    "description": "Node.js SDK for the Mail RP API",
+    "keywords": [
+        "mail-rp",
+        "mail",
+        "roleplay",
+        "api",
+        "sdk"
+    ],
+    "homepage": "https://mail-rp.com",
+    "author": "Team Xelyos <contact@xelyos.fr> (https://xelyos.fr/)",
+    "type": "module",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
+    "types": "./dist/esm/index.d.ts",
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/esm/index.d.ts",
+                "default": "./dist/esm/index.js"
+            },
+            "require": {
+                "types": "./dist/cjs/index.d.ts",
+                "default": "./dist/cjs/index.js"
+            }
+        }
+    },
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "sideEffects": false,
+    "engines": {
+        "node": ">=18.18"
+    },
+    "scripts": {
+        "build": "rm -rf dist && tsc -p tsconfig.build.json && tsc -p tsconfig.cjs.json && node scripts/postbuild.mjs",
+        "typecheck": "tsc --noEmit",
+        "test": "node --test test/*.test.ts",
+        "prepublishOnly": "npm run typecheck && npm test && npm run build"
+    },
+    "devDependencies": {
+        "@types/node": "^24.0.0",
+        "typescript": "~5.9.3"
+    }
+}

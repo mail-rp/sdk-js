@@ -3,7 +3,7 @@
 Node.js (server-side) client for the [Mail RP API](https://api.mail-rp.com/docs/): domains, users, calendars,
 newsletters, mail sending.
 
-> **Development version (`1.0.0-dev`)**: the API surface may still change before the first stable release.
+> **Development version (`1.0.1-dev`)**: the API surface may still change before the first stable release.
 
 - Node.js ≥ 18, no dependency (uses `fetch`)
 - Written in TypeScript: types included, ESM and CommonJS
@@ -188,6 +188,12 @@ npm test           # node:test, directly on the TypeScript sources (Node ≥ 22.
 npm run typecheck
 npm run build      # dist/esm + dist/cjs + declarations
 ```
+
+## Repository
+
+This GitHub repository is a read-only mirror of the development version: the code is maintained in the Mail RP
+repository (`sdk/js`) and published here with each release. Please open issues here; pull requests cannot be merged
+directly into this mirror.
 
 ## License
 

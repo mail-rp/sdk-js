@@ -188,3 +188,7 @@ npm test           # node:test, directly on the TypeScript sources (Node ≥ 22.
 npm run typecheck
 npm run build      # dist/esm + dist/cjs + declarations
 ```
+
+## License
+
+[MIT](LICENSE) © Xelyos

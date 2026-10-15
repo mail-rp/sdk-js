@@ -2,6 +2,7 @@
     "name": "@xelyos/mail-rp",
     "version": "1.0.0-dev",
     "description": "Node.js SDK for the Mail RP API",
+    "license": "MIT",
     "keywords": [
         "mail-rp",
         "mail",

@@ -50,6 +50,10 @@ const mailRp = new MailRpClient('xls-mrp-...', {
 });
 ```
 
+The key is optional (for instance when it comes from a configuration that may be empty). `mailRp.hasApiKey()` tells
+whether a key is set; without one, requests are sent unauthenticated and the API answers `401`
+(`AuthenticationError`), except on the public routes such as `mailRp.system.health()`.
+
 A key only has access to the permissions ticked in the panel and, when it is restricted, to its domains.
 `await mailRp.system.checkKey(true)` returns the name, the language and the permissions of the key.
 

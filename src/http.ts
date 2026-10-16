@@ -13,7 +13,7 @@ export interface ResponseMeta {
 }
 
 export interface RequesterConfig {
-    apiKey: string;
+    apiKey?: string | undefined;
     baseUrl: string;
     timeout: number;
     maxRetries: number;
@@ -34,6 +34,10 @@ export class Requester {
 
     constructor(config: RequesterConfig) {
         this.config = config;
+    }
+
+    hasApiKey(): boolean {
+        return this.config.apiKey !== undefined;
     }
 
     /** Request answered with a JSON body. */
@@ -58,10 +62,10 @@ export class Requester {
     private async send(method: string, path: string, query?: object, body?: unknown): Promise<string> {
         const url = this.config.baseUrl.replace(/\/+$/, '') + path + buildQuery(query);
         const headers: Record<string, string> = {
-            Authorization: `Bearer ${this.config.apiKey}`,
             Accept: 'application/json',
             'User-Agent': `mail-rp-node/${VERSION}`,
         };
+        if (this.config.apiKey !== undefined) headers.Authorization = `Bearer ${this.config.apiKey}`;
         let payload: string | undefined;
         if (body !== undefined) {
             headers['Content-Type'] = 'application/json';

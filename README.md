@@ -3,7 +3,7 @@
 Node.js (server-side) client for the [Mail RP API](https://api.mail-rp.com/docs/): domains, users, calendars,
 newsletters, mail sending.
 
-> **Development version (`1.0.1-dev`)**: the API surface may still change before the first stable release.
+> **Development version (`1.0.2-dev`)**: the API surface may still change before the first stable release.
 
 - Node.js ≥ 18, no dependency (uses `fetch`)
 - Written in TypeScript: types included, ESM and CommonJS

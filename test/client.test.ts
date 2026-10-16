@@ -221,19 +221,7 @@ describe('MailRpClient', () => {
         });
     });
 
-    it('tells whether an API key is set', () => {
-        assert.equal(createClient(new FakeFetch()).hasApiKey(), true);
-        assert.equal(new MailRpClient(' xls-mrp-test ').hasApiKey(), true);
-        assert.equal(new MailRpClient().hasApiKey(), false);
-        assert.equal(new MailRpClient(null).hasApiKey(), false);
-        assert.equal(new MailRpClient('').hasApiKey(), false);
-        assert.equal(new MailRpClient('  ').hasApiKey(), false);
-        assert.throws(() => new MailRpClient(42 as unknown as string), MailRpError);
-    });
-
-    it('sends no Authorization header without a key', async () => {
-        const fake = new FakeFetch().queue(200, { status: 'online', version: '2.0.0' });
-        await new MailRpClient(undefined, { baseUrl: 'https://api.test', fetch: fake.fetch }).system.health();
-        assert.equal(fake.last.headers.Authorization, undefined);
+    it('rejects an empty key', () => {
+        assert.throws(() => new MailRpClient(' '), MailRpError);
     });
 });

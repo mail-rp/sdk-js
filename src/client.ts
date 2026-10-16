@@ -44,13 +44,12 @@ export class MailRpClient {
     private readonly requester: Requester;
 
     /**
-     * @param apiKey key created in the panel (`xls-mrp-...`); without it, only the public routes
-     *               (`system.health()`) can be called
+     * @param apiKey key created in the panel (`xls-mrp-...`)
      * @param options
      */
-    constructor(apiKey?: string | null, options: ClientOptions = {}) {
-        if (apiKey !== undefined && apiKey !== null && typeof apiKey !== 'string') {
-            throw new MailRpError('The Mail RP API key must be a string');
+    constructor(apiKey: string, options: ClientOptions = {}) {
+        if (typeof apiKey !== 'string' || apiKey.trim() === '') {
+            throw new MailRpError('The Mail RP API key is empty');
         }
         const fetchImplementation = options.fetch ?? globalThis.fetch;
         if (typeof fetchImplementation !== 'function') {
@@ -64,7 +63,7 @@ export class MailRpClient {
         }
 
         this.requester = new Requester({
-            apiKey: apiKey?.trim() || undefined,
+            apiKey: apiKey.trim(),
             baseUrl: options.baseUrl ?? DEFAULT_BASE_URL,
             timeout,
             maxRetries,
@@ -80,14 +79,6 @@ export class MailRpClient {
         this.users = new UserResource(this.requester);
         this.calendars = new CalendarResource(this.requester);
         this.newsletters = new NewsletterResource(this.requester);
-    }
-
-    /**
-     * Whether an API key is set on this client (a blank key counts as missing). Without a key, the requests are sent
-     * without authentication and the API answers `401` (`AuthenticationError`) except on the public routes.
-     */
-    hasApiKey(): boolean {
-        return this.requester.hasApiKey();
     }
 
     /**

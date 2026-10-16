@@ -3,7 +3,7 @@
 Node.js (server-side) client for the [Mail RP API](https://api.mail-rp.com/docs/): domains, users, calendars,
 newsletters, mail sending.
 
-> **Development version (`1.0.2-dev`)**: the API surface may still change before the first stable release.
+> **Development version (`1.0.3-dev`)**: the API surface may still change before the first stable release.
 
 - Node.js ≥ 18, no dependency (uses `fetch`)
 - Written in TypeScript: types included, ESM and CommonJS
@@ -49,10 +49,6 @@ const mailRp = new MailRpClient('xls-mrp-...', {
     onResponse: (meta) => console.debug(meta.requestId, meta.rateLimitRemaining),
 });
 ```
-
-The key is optional (for instance when it comes from a configuration that may be empty). `mailRp.hasApiKey()` tells
-whether a key is set; without one, requests are sent unauthenticated and the API answers `401`
-(`AuthenticationError`), except on the public routes such as `mailRp.system.health()`.
 
 A key only has access to the permissions ticked in the panel and, when it is restricted, to its domains.
 `await mailRp.system.checkKey(true)` returns the name, the language and the permissions of the key.
